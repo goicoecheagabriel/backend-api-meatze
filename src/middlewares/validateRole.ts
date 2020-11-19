@@ -3,10 +3,10 @@ import {Request, RequestHandler} from 'express'
 export const isValidRole: RequestHandler= (req:Request | any, res,next)=>{
     
     try {
-        console.log(req.user);
+      //  console.log(req.user);
        // console.log(req.user,'esto es el nuevo');
     if(req.user.tipo === 'ADMIN'){
-        console.log(req.user,'esto es el nuevo');
+       // console.log(req.user,'esto es el nuevo');
         return next();
     }
     
