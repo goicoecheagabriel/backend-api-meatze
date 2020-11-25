@@ -25,6 +25,10 @@ app.use('/api',listaRoutes);
 app.use('/api',multimediaRoutes);
 app.use('/api',usuarioRoutes);
 
+app.use('/',(req,res) => {
+    res.status(403).send("Acceso No Autorizado");
+})
+
 app.listen(app.get('port'),() => {
     console.log(`Server on port ${app.get('port')}`);    
 })
