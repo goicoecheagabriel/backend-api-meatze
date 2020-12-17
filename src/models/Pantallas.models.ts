@@ -31,8 +31,16 @@ const pantallaSchema = new Schema({
     },
 
     resolucion: {
-        height: Number,
-        width: Number
+        height:{ 
+            type:Number,
+            required: true,
+            trim: true,
+        },
+        width:{ 
+            type:Number,
+            required: true,
+            trim: true,
+        },
     },
     location: {
         type: {
