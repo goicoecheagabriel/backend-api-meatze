@@ -5,8 +5,8 @@ import isValidToken from '../middlewares/validateToken';
 import {isValidRole} from '../middlewares/validateRole';
 /*Cuando se llama a un archivo se puede traer sin destructurar solo la que este por default */
 
-router.get('/pantallas', isValidToken, pantallasController.getPantallas);
-router.get('/pantallas/:id', isValidToken, pantallasController.getPantalla);
+router.get('/pantallas', /*isValidToken,*/ pantallasController.getPantallas);
+router.get('/pantallas/:id',/* isValidToken,*/ pantallasController.getPantalla);
 router.post('/pantallas', isValidToken, isValidRole, pantallasController.createPantalla);
 router.put('/pantallas/:id', isValidToken, pantallasController.updatePantalla);
 router.delete('/pantallas/:id', isValidToken,  isValidRole, pantallasController.deletePantalla);
