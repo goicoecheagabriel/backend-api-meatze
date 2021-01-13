@@ -9,8 +9,13 @@ import multimediaRoutes from './routes/multimedias.routes';
 import usuarioRoutes from './routes/users.routes';
 require('./database/conexionmongodb');
 
+
 /*----Inicializaciones----*/
 app.set('port',sistema.PORT);
+
+// process.argv[2] === ('create') && require('./database/deployInitialDb.js')(); 
+process.argv[2] === ('create') && require('./database/create')(); 
+
 
 /*----Middlewares---*/
 app.use(morgan('dev'));

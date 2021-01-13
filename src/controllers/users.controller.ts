@@ -1,6 +1,6 @@
 import { RequestHandler, Response, Request } from "express";
-import mongoose from "mongoose";
 import { IUser } from "../models/Users.models";
+import mongoose from "mongoose";
 import User from "../models/Users.models";
 import jwt from 'jsonwebtoken';
 import {sistema} from '../config/config';
