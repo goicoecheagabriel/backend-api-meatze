@@ -13,7 +13,7 @@ export const getListas: RequestHandler = (req, res) => {
 };
 
 export const getLista: RequestHandler = (req, res) => {
-  ModeloLista.findById(req.params.id, (err, doc) => {
+  ModeloLista.findById(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `Document not found` });
     res.status(201).json(doc);
@@ -50,7 +50,7 @@ export const updateLista: RequestHandler = (req, res) => {
 };
 
 export const deleteLista: RequestHandler = (req, res) => {
-  ModeloLista.findByIdAndDelete(req.params.id, (err, doc) => {
+  (ModeloLista.findByIdAndDelete as any)(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `Document not found` });
     res.status(200).json(doc);
@@ -60,7 +60,7 @@ export const deleteLista: RequestHandler = (req, res) => {
 export const insertarMultimedia: RequestHandler=(req,res)=>{
   const {multimedia} = req.body;
   
-  ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err, doc)=>{
+  ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err:any, doc:any)=>{
     if(!doc) {
       ModeloLista.findByIdAndUpdate(req.params.id,{$push:{multimedias:multimedia}},{new: true},(err,docB)=>{
         if(err) return errors.response(res,500,`Error: ${err}`);
@@ -75,7 +75,7 @@ export const insertarMultimedia: RequestHandler=(req,res)=>{
 
 export const eliminarMultimedia: RequestHandler=(req,res)=>{
   const{multimedia} = req.body;
-  ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err,doc)=>{
+  ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err:any,doc:any)=>{
     if(doc){
       ModeloLista.findByIdAndUpdate(req.params.id,{$pull:{multimedias:multimedia}},(err,docB)=>{
         if(err) return errors.response(res,500,`Error:${err}`);
