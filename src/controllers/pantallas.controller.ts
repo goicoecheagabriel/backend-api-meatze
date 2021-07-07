@@ -15,7 +15,7 @@ export const getPantallas: RequestHandler = (req: Request | any, res) => {
 };
 
 export const getPantalla: RequestHandler = (req, res) => {
-  ModeloPantalla.findById(req.params.id, (err, doc) => {
+  ModeloPantalla.findById(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `No document found` });
     res.status(200).json(doc);
@@ -46,7 +46,7 @@ export const updatePantalla: RequestHandler = (req, res) => {
 
 export const deletePantalla: RequestHandler = (req, res) => {
   const { id } = req.params;
-  ModeloPantalla.findByIdAndDelete(id, (err, doc) => {
+  (ModeloPantalla.findByIdAndDelete as any)(id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (doc == null) {
       return res
@@ -62,7 +62,7 @@ export const insertarLista: RequestHandler = (req, res) => {
   const { id } = req.params;
   const { lista } = req.body;
   //$in lleva un array de valores, y $nin¿?
-  ModeloPantalla.findOne({ listas: { $in: [lista] } }, (err, doc) => {
+  ModeloPantalla.findOne({ listas: { $in: [lista] } }, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
 
     if (!doc) {
@@ -97,7 +97,7 @@ export const eliminarLista: RequestHandler = (req, res) => {
   const { id } = req.params;
   const { lista } = req.body;
 
-  ModeloPantalla.findOne({ listas: { $in: [lista] } }, (err, doc) => {
+  ModeloPantalla.findOne({ listas: { $in: [lista] } }, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
 
     if (doc) {

@@ -10,7 +10,8 @@ module.exports = function saludo(){
 
     prompt.get(['username', 'password','email','tipo'], function (err:any, result:any) {
     if (err) { return onErr(err); }
-    console.log('Datos recibidos por lina de comando:');
+    console.log('Datos recibidos por linea de comando:');
+    
    /*  console.log('  Username: ' + result.username);
    console.log('  Password: ' + result.password);
     console.log('  Email: ' + result.email);

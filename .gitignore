@@ -1,5 +1,4 @@
 .vscode
 node_modules
-.env
-package-lock.json
+#agregar .env cuando terminemos el proyecto
 dist
