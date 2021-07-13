@@ -1,9 +1,9 @@
-import { RequestHandler } from "express";
+import { Request, RequestHandler, Response } from "express";
 import ModeloLista from "./../models/Listas.models";
 import mongoose from "mongoose";
 import errors from '../services/errors'
 
-export const getListas: RequestHandler = (req, res) => {
+export const getListas: RequestHandler = (req: Request , res: Response) => {
   ModeloLista.find((err, doc) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (doc.length == 0)
@@ -12,7 +12,7 @@ export const getListas: RequestHandler = (req, res) => {
   });
 };
 
-export const getLista: RequestHandler = (req, res) => {
+export const getLista: RequestHandler = (req: Request , res: Response) => {
   ModeloLista.findById(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `Document not found` });
@@ -20,7 +20,7 @@ export const getLista: RequestHandler = (req, res) => {
   });
 };
 
-export const createLista: RequestHandler = (req, res) => {
+export const createLista: RequestHandler = (req: Request, res: Response) => {
   const { nombre, descripcion } = req.body;
   ModeloLista.create(
     {
@@ -35,7 +35,7 @@ export const createLista: RequestHandler = (req, res) => {
   );
 };
 
-export const updateLista: RequestHandler = (req, res) => {
+export const updateLista: RequestHandler = (req: Request, res: Response) => {
   ModeloLista.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -49,7 +49,7 @@ export const updateLista: RequestHandler = (req, res) => {
   );
 };
 
-export const deleteLista: RequestHandler = (req, res) => {
+export const deleteLista: RequestHandler = (req: Request, res: Response) => {
   (ModeloLista.findByIdAndDelete as any)(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `Document not found` });
@@ -57,7 +57,8 @@ export const deleteLista: RequestHandler = (req, res) => {
   });
 };
 
-export const insertarMultimedia: RequestHandler=(req,res)=>{
+// Inserta un Multimedia en la lista /
+export const insertarMultimedia: RequestHandler= (req: Request,res: Response) => {
   const {multimedia} = req.body;
   
   ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err:any, doc:any)=>{
@@ -73,7 +74,7 @@ export const insertarMultimedia: RequestHandler=(req,res)=>{
 
 }
 
-export const eliminarMultimedia: RequestHandler=(req,res)=>{
+export const eliminarMultimedia: RequestHandler= (req: Request,res: Response) => {
   const{multimedia} = req.body;
   ModeloLista.findOne({multimedias: {$in: [multimedia]}},(err:any,doc:any)=>{
     if(doc){

@@ -1,8 +1,8 @@
-import {Router} from 'express'
+import { Router } from 'express'
 const router = Router();
 import * as multimediaController from '../controllers/multimedias.controllers';
 import isValidToken from '../middlewares/validateToken';
-import {isValidRole} from '../middlewares/validateRole';
+import { isValidRole } from '../middlewares/validateRole';
 
 router.get('/multimedias',isValidToken,multimediaController.getMultimedias)
 router.get('/multimedias/:id',isValidToken,multimediaController.getMultimedia)

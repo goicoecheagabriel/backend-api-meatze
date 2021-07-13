@@ -1,26 +1,26 @@
 import express from 'express';
-const app = express();
 import morgan from 'morgan';
-import {sistema} from './config/config';
+import { sistema } from './config/config';
 import cors from 'cors';
 import pantallaRoutes from './routes/pantallas.routes';
 import listaRoutes from './routes/listas.routes';
 import multimediaRoutes from './routes/multimedias.routes';
 import usuarioRoutes from './routes/users.routes';
-require('./database/conexionmongodb');
 
 
-/*----Inicializaciones----*/
+/*---- Inicializaciones ----*/
+const app = express();
 app.set('port',sistema.PORT);
+require('./database/conexionmongodb');
 
 // process.argv[2] === ('create') && require('./database/deployInitialDb.js')(); 
 process.argv[2] === ('create') && require('./database/create')(); 
 
 
-/*----Middlewares---*/
+/*---- Middlewares ---*/
 app.use(morgan('dev'));
-app.use(cors());
-app.use(express.json());
+app.use(cors()); 
+app.use(express.json()); //habilitar formato JSON
 app.use(express.urlencoded({ extended:false }));
 
 /*---- Routes */

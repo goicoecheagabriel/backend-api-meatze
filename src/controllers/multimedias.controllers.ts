@@ -1,9 +1,9 @@
-import { RequestHandler, Response, Request } from "express";
-import Multimedia, { IMultimedia } from "../models/Multimedias.models";
+import { Response, Request, RequestHandler } from "express";
+import Multimedia from "../models/Multimedias.models";
 import mongoose from "mongoose";
 import errors from '../services/errors'
 
-export const getMultimedias = async (req: Request, res: Response) => {
+export const getMultimedias: RequestHandler = async (req: Request, res: Response) => {
   try {
     const docs = await Multimedia.find();
 
@@ -15,7 +15,8 @@ export const getMultimedias = async (req: Request, res: Response) => {
    errors.response(res,500,`Error: ${error}`);
   }
 };
-export const getMultimedia = async (req: Request, res: Response) => {
+
+export const getMultimedia: RequestHandler = async (req: Request, res: Response) => {
   try {
     const doc = await Multimedia.findById(req.params.id);
 
@@ -28,7 +29,8 @@ export const getMultimedia = async (req: Request, res: Response) => {
     errors.response(res,500,`Error: ${error}`);
   }
 };
-export const createMultimedia = async (req: Request, res: Response) => {
+
+export const createMultimedia: RequestHandler = async (req: Request, res: Response) => {
   try {
     const doc = await new Multimedia({
       ...req.body,
@@ -40,7 +42,8 @@ export const createMultimedia = async (req: Request, res: Response) => {
     errors.response(res,500,`Error: ${error}`);
   }
 };
-export const updateMultimedia = async (req: Request, res: Response) => {
+
+export const updateMultimedia: RequestHandler = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const docUpdated = await Multimedia.findByIdAndUpdate(id, req.body, {
@@ -54,7 +57,8 @@ export const updateMultimedia = async (req: Request, res: Response) => {
     errors.response(res,500,`Error: ${error}`);
   }
 };
-export const deleteMultimedia = async (req: Request, res: Response) => {
+
+export const deleteMultimedia: RequestHandler = async (req: Request, res: Response) => {
   try {
 
    const docDeleted = await Multimedia.findByIdAndDelete(req.params.id);

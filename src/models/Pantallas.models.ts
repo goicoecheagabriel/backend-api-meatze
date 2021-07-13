@@ -1,6 +1,25 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
-const pantallaSchema = new Schema({
+export interface IPantalla extends Document {
+    nombre: string;
+    descripcion?: string;
+    marca?: string;
+    modelo?: string;
+    orientacion?: string;
+    resolucion: 
+    {
+        height: number;
+        width: number;
+    };
+    location?: 
+    {
+        type: string;
+        coordinates:number[];
+    };
+    listas?: any[];
+}
+
+const pantallaSchema = new Schema <IPantalla> ({
     _id: Schema.Types.ObjectId,
     nombre: {
         type: String,
@@ -51,14 +70,11 @@ const pantallaSchema = new Schema({
             type: [Number],
         },
     },
-    listas: [{type:Schema.Types.ObjectId,
-        autopopulate: true,
-            //  validate: [function(lista:string){
-            //     // console.log(lista)                
-            //    //  console.log(pantallaSchema.path('nombre'));
-            //     return false;//false es que no pasa la validacion
-            //  },"La lista ya existe en la pantalla"],
-             ref:"lista"}]
+    listas: [{
+        type:Schema.Types.ObjectId,
+        ref:"lista",
+        autopopulate: true
+    }]
 },{
     versionKey:false,
     timestamps:true,
@@ -76,4 +92,4 @@ const pantallaSchema = new Schema({
 // })
 pantallaSchema.plugin(require('mongoose-autopopulate'));
 
-export default model('pantalla', pantallaSchema);
+export default model <IPantalla> ('pantalla', pantallaSchema);
