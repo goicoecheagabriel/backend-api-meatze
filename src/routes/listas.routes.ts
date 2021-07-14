@@ -1,8 +1,8 @@
-import {Router} from 'express';
+import { Router } from 'express';
 const router = Router();
 import * as listasController from '../controllers/listas.controller';
 import isValidToken from '../middlewares/validateToken';
-import {isValidRole} from '../middlewares/validateRole'; 
+import { isValidRole } from '../middlewares/validateRole'; 
 
 
 router.get('/listas',  isValidToken, listasController.getListas);

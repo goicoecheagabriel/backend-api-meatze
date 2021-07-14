@@ -1,10 +1,10 @@
-import { RequestHandler } from "express";
+import { Request, RequestHandler, Response } from "express";
 import mongoose from "mongoose";
 import ModeloPantalla from "../models/Pantallas.models";
 import errors from '../services/errors';
 
-
-export const getPantallas: RequestHandler = (req: Request | any, res) => {
+// devuelve todas
+export const getPantallas: RequestHandler = (req: Request, res: Response) => {
   ModeloPantalla.find((err, doc) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (doc.length == 0)
@@ -13,8 +13,8 @@ export const getPantallas: RequestHandler = (req: Request | any, res) => {
     res.status(200).json(doc);
   });
 };
-
-export const getPantalla: RequestHandler = (req, res) => {
+//devuelve una
+export const getPantalla: RequestHandler = (req: Request, res: Response) => {
   ModeloPantalla.findById(req.params.id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
     if (!doc) return res.status(404).json({ message: `No document found` });
@@ -22,7 +22,7 @@ export const getPantalla: RequestHandler = (req, res) => {
   });
 };
 
-export const createPantalla: RequestHandler = (req, res) => {
+export const createPantalla: RequestHandler = (req: Request, res: Response) => {
   ModeloPantalla.create(
     { ...req.body, _id: new mongoose.Types.ObjectId() },
     (err: any, doc: any) => {
@@ -35,7 +35,7 @@ export const createPantalla: RequestHandler = (req, res) => {
   );
 };
 
-export const updatePantalla: RequestHandler = (req, res) => {
+export const updatePantalla: RequestHandler = (req: Request, res: Response) => {
   const { id } = req.params;
   ModeloPantalla.findByIdAndUpdate(id, req.body, { new: true,runValidators:true }, (err, doc) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
@@ -44,7 +44,7 @@ export const updatePantalla: RequestHandler = (req, res) => {
   });
 };
 
-export const deletePantalla: RequestHandler = (req, res) => {
+export const deletePantalla: RequestHandler = (req: Request, res: Response) => {
   const { id } = req.params;
   (ModeloPantalla.findByIdAndDelete as any)(id, (err:any, doc:any) => {
     if (err) return res.status(500).json({ message: `Error: ${err}` });
@@ -57,7 +57,8 @@ export const deletePantalla: RequestHandler = (req, res) => {
   });
 };
 
-export const insertarLista: RequestHandler = (req, res) => {
+//inserta una lista a una pantalla /api/pantallas/insertarlista/IDPantalla
+export const insertarLista: RequestHandler = (req: Request, res: Response) => {
   /**---------------------------------------------------------- */
   const { id } = req.params;
   const { lista } = req.body;
@@ -93,7 +94,8 @@ export const insertarLista: RequestHandler = (req, res) => {
   });
 };
 
-export const eliminarLista: RequestHandler = (req, res) => {
+//elimina una lista de una pantalla.Recibe el id de la pantalla por query param y el id de la lista por el body content.Siempre será asi
+export const eliminarLista: RequestHandler = (req: Request, res: Response) => {
   const { id } = req.params;
   const { lista } = req.body;
 

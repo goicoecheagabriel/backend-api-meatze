@@ -2,11 +2,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// interface ISistema{
-//     PORT : number;
-//     jwtSECRET: string;
-// }
-
 export const sistema = {
     PORT: process.env.PORT || 3000,
     jwtSECRET: process.env.JWT_SECRET || '',

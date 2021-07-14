@@ -1,6 +1,11 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
-const listaSchema = new Schema({
+export interface ILista extends Document {
+    nombre: string;
+    descripcion: string;
+    multimedias:[];
+}
+const listaSchema = new Schema <ILista> ({
     _id: Schema.Types.ObjectId,
     nombre:{
         type:String,
@@ -27,4 +32,4 @@ const listaSchema = new Schema({
 
 listaSchema.plugin(require('mongoose-autopopulate'));
 
-export default model('lista',listaSchema);
+export default model <ILista> ('lista',listaSchema);
